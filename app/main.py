@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from service.blockchain import Blockchain
-from model.transaction import Transaction
+from app.model.transaction import Transaction
 app = FastAPI()
 blockchain = Blockchain()
 
