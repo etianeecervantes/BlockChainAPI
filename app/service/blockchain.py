@@ -1,5 +1,5 @@
 import time
-from app.block import Block
+from app.service.block import Block
 
 
 class Blockchain:
