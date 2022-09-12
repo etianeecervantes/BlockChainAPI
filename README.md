@@ -6,7 +6,8 @@ Python 3.10
 
 ## Comandos CMD
 
-pip install --upgrade pip && pip install -r requirements.txt /n
+pip install --upgrade pip && pip install -r requirements.txt
+
 uvicorn app.main:app --reload
 
 # Levantar proyecto en un contenedor
