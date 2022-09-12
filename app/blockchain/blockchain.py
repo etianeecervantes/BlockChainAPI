@@ -1,5 +1,5 @@
 import time
-from app.block import Block
+from app.blockchain.block import Block
 
 
 class Blockchain:
@@ -9,31 +9,24 @@ class Blockchain:
     def __init__(self):
         self.unconfirmed_transactions = []
         self.chain = []
-        self.create_genesis_block()
+        self.create_firts_block()
 
-    def create_genesis_block(self):
-        """
-        A function to generate genesis block and appends it to
-        the chain. The block has index 0, previous_hash as 0, and
-        a valid hash.
-        """
-        genesis_block = Block(0, [], time.time(), "0")
-        genesis_block.hash = genesis_block.compute_hash()
-        self.chain.append(genesis_block)
+    def create_firts_block(self):
+        firts_block = Block(0, [], time.time(), "0")
+        firts_block.hash = firts_block.compute_hash()
+        self.chain.append(firts_block)
 
     @property
-    def last_block(self):
+    def get_last_block(self):
         return self.chain[-1]
 
     def add_block(self, block, proof):
         """
-        A function that adds the block to the chain after verification.
-        Verification includes:
-        * Checking if the proof is valid.
-        * The previous_hash referred in the block and the hash of latest block
-          in the chain match.
+        Why Do This Need Proof of Work? 
+        Because they are decentralized and peer-to-peer by design, blockchains such as cryptocurrency networks require some way of achieving both consensus and security. 
+        Proof of work is one such method that makes it too resource-intensive to try to overtake the network.
         """
-        previous_hash = self.last_block.hash
+        previous_hash = self.get_last_block.hash
 
         if previous_hash != block.previous_hash:
             return False
@@ -46,18 +39,10 @@ class Blockchain:
         return True
 
     def is_valid_proof(self, block, block_hash):
-        """
-        Check if block_hash is valid hash of block and satisfies
-        the difficulty criteria.
-        """
         return (block_hash.startswith('0' * Blockchain.difficulty) and
                 block_hash == block.compute_hash())
 
     def proof_of_work(self, block):
-        """
-        Function that tries different values of nonce to get a hash
-        that satisfies our difficulty criteria.
-        """
         block.nonce = 0
 
         computed_hash = block.compute_hash()
@@ -79,7 +64,7 @@ class Blockchain:
         if not self.unconfirmed_transactions:
             return False
 
-        last_block = self.last_block
+        last_block = self.get_last_block
 
         new_block = Block(index=last_block.index + 1,
                           transactions=self.unconfirmed_transactions,
