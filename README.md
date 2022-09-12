@@ -13,11 +13,17 @@ uvicorn app.main:app --reload
 # Levantar proyecto en un contenedor
 
 .
+
 ├── app
+
 │   ├── __init__.py
+
 │   └── main.py
+
 ├── Dockerfile
+
 └── requirements.txt
+
 
 ## Requisitos Docker
 
